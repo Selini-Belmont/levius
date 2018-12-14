@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Login</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/login.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <main class="principal">
+    <section class="login">
+      <h2>Login</h2>
+      <p>
+        {{#if error}}
+            <b>{{msg}}</b>
+        {{/if}}
+      </p>
+      <form class="formulario" action="login" method="POST">
+        <div>
+          <label for="crm">CRM:</label><br/>
+          <input type="text" name="user" id="crm"/>
+        </div>
+        <div style="margin-top:20px">
+          <label for="senha">Senha:</label><br/>
+          <input type="password" name="pass" id="senha"/>
+        </div>
+        <div style="text-align:center">
+          <button class="botao">Entrar</button>
+        </div>
+      </form>
+    </section>
+    <div></div>
+
+    
+  </main>
+</body>
+</html>

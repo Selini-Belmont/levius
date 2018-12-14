@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="author" content="Luana Manfredi">
+  <title>Levius</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <main class="principal">
+    <section class="secao" id="secao-esquerda">
+      <header class="cabecalho">
+        <div class="logo"></div>
+        <div id="nome-projeto">Levius</div>
+      </header>
+      <div class="space"></div>
+      <div id="div-esquerda">
+        <p>Iniciar chat agora mesmo:</p>
+        <form class="formulario" action="/chat" method="POST">
+          <input type="text" name="name" placeholder="Seu nome" class="campo" id="nome" required>
+          <input type="email" name="email" placeholder="E-mail (opcional)" class="campo" id="email">
+          <input type="submit" value="Iniciar" class="botao" id="botao-esquerdo">
+        </form>
+      </div>
+      <div class="space" style="padding-top: 42px;"></div>
+    </section>
+    <section class="secao" id="secao-direita">
+      <nav class="navbar">
+        <a href="/sobre" class="link">Sobre o projeto</a>
+        <a href="#" class="link desabilitado">Em Breve</a>
+      </nav>
+      <div class="space"></div>
+      <div id="div-direita">
+        <p id="frase-efeito">Tire o seu peso. Fique leve!</p>
+        <input type="button" value="Colabore" class="botao" id="botao-direito">
+      </div>
+      <div id="modal-contato" class="modal">
+        <div class="conteudo-modal">
+          <span class="fechar">&times;</span>
+          <p>Quer se voluntariar, tem dúvidas ou sugestões?</p>
+          <p>Entre em contato conosco através do e-mail: equipe.levius@gmail.com</p>
+        </div>
+      </div>
+      <div class="space" style="padding-top: 29px;"></div>
+    </section>
+  </main>
+  <script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>

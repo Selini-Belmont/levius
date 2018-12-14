@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Chat</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/chat.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <main class="principal">
+    <section class="esperando active">
+      {{#if is_psycho}}
+          <span>Esperando por um paciente...</span>
+      {{else}}
+          <span>Esperando por um psicólogo(a)...</span>
+      {{/if}}
+    </section>
+    <section class="secao">
+      <aside class="informacoes">
+        <div class="sair">
+            <span>&lt;</span>
+            <span class="texto-sair">Sair do chat</span>
+        </div>
+        <div class="sobre">
+          <div class="space"></div>
+          <p class="apresentacao">Você está falando com</p>
+          {{#if is_psycho}}{{else}}
+          <figure class="foto" style="background-image:url('https://placeimg.com/120/120/animals/grayscale')"></figure>
+          {{/if}}
+          <p class="nome">Nome do Psicólogo</p>
+          <p class="crm">CRM: 123456</p>
+          {{#if is_psycho}}{{else}}
+          <p class="descricao">Uma breve descrição sobre o psicólogo e sua área de atuação ou algo do tipo.</p>
+          {{/if}}
+          <div class="space"></div>
+          <a href="#" class="feedback">Feedback</a>
+        </div>
+      </aside>
+      <div class="divisor"></div>
+      <div class="chat">
+        <div class="mensagens">
+          <div class="mensagem">
+            <div class="texto">Olá, senhor.</div>
+            <div class="tempo">17h30</div>
+          </div>
+          <div class="mensagem outro">
+            <div class="texto">Olá, meu caro paciente, como posso ajudar?</div>
+            <div class="tempo">17h31</div>
+          </div>
+        </div>
+        <form class="escrever" onsubmit="handlesend(event)">
+          <input class="campo" placeholder="Escreva aqui..." />
+          <button class="enviar"></button>
+        </form>
+      </div>
+    </section>
+  </main>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var chat = document.querySelector(".secao"),
+        wait = document.querySelector(".esperando"),
+        msgs = document.querySelector(".mensagens"),
+        input = document.querySelector(".campo"),
+        sobre = document.querySelector(".sobre");
+
+    function show_chat(){
+        wait.classList.remove("active");
+        chat.classList.add("active");
+    }
+    function show_wait(){
+        chat.classList.remove("active");
+        wait.classList.add("active");
+        msgs.innerHTML = "";
+    }
+
+    function get_time(){
+      return "10h00";
+    }
+
+
+    var socket = io();
+    socket.on('connect', function(){
+        {{#if is_psycho}}
+        socket.on('paired', function(data){
+            sobre.querySelector(".nome").innerText = data.name;
+            sobre.querySelector(".crm").innerText = "Email: " + data.email;
+            show_chat();
+        });
+        {{else}}
+        socket.on('paired', function(data){
+          console.log(data);
+            sobre.querySelector(".nome").innerText = data.name;
+            sobre.querySelector(".crm").innerText = "CRM: "+ data.crm;
+            sobre.querySelector(".foto").style.backgroundImage = "url('"+ data.picture +"')";
+            sobre.querySelector(".descricao").innerText = data.about;
+            show_chat();
+        });
+        {{/if}}
+
+        socket.on('message', function(msg){
+            msgs.innerHTML += `
+              <div class="mensagem outro">
+                <div class="texto">`+ msg +`</div>
+                <div class="tempo">`+ get_time() +`</div>
+              </div>
+            `;
+            msgs.scrollTo(0, msgs.scrollHeight);
+        });
+
+        socket.on('queued', function(){
+            show_wait();
+        });
+    });
+
+
+
+    function handlesend(e){
+        e.preventDefault();
+        var msg = input.value;
+        msgs.innerHTML += `
+          <div class="mensagem">
+            <div class="texto">`+ msg +`</div>
+            <div class="tempo">`+ get_time() +`</div>
+          </div>
+        `;
+        msgs.scrollTo(0, msgs.scrollHeight);
+        input.value = "";
+        input.focus();
+        socket.emit("message", msg);
+    }
+
+    document.querySelector(".sair").onclick = function(){
+      socket.close();
+      window.location.href="/";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+* {
+  font-family: 'Roboto', sans-serif;  
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.principal {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  background-image: url(../img/background_rect.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left top;
+  background-color: #F1F1F4;
+  padding: 64px 110px;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+}
+
+.login{
+  padding: 48px 52px;
+  box-sizing: border-box;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  box-shadow: 0 4px 4px rgba(0,0,0,.06);  
+}
+  .login h2{
+    margin: 0;
+    font-weight: 300;
+  }
+
+  .formulario{
+    margin-top: 36px;
+    padding: 0 20px;
+  }
+
+    label{
+      font-size: 14px;
+    }
+
+    input{
+      width: 254px;
+      font-family: "Roboto", sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      background-color: #EAF0F7;
+      border-radius: 3px;
+      border: none;
+      padding: 16px 24px;
+      margin-top: 8px;
+    }
+
+    .botao{
+      color: #FFFFFF;
+      border-radius: 5px;
+      border: none;
+      padding: 13px 64px;
+      text-transform: uppercase;
+      font-size: 16px;
+      font-weight: 300;
+      background-color: #6562FF;
+      margin: 0 auto;
+      margin-top: 27px;
+      cursor: pointer;
+    }
