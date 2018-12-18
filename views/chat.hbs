@@ -78,7 +78,8 @@
     }
 
     function get_time(){
-      return "10h00";
+      now = new Date;
+      return `${now.getHours()}:${now.getMinutes()}`;
     }
 
 
